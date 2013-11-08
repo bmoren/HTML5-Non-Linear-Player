@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<style>
+
+body{
+
+	margin: 0px 0px 0px 0px;
+	background-color: #000;
+}
+
+#video1{
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+	
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+</style>
+<script>
+
+function videoEnded() {
+
+	//How many videos in your folder?
+	var num = 4;
+
+	//push for the thumbnails
+	var push = Math.floor(Math.random() * num +1);
+
+	$("#video1").attr("src", 'data/' + push + '.mp4').get(0).play();
+} ;
+
+
+/*
+$(document).ready(function(){
+
+//How many videos in your folder?
+var num = 4;
+
+//push for the thumbnails
+var push = Math.floor(Math.random() * num +1);
+
+  $('.box').text('<video id="playme" autoplay type="video/mp4" src="data/' + push + '.mp4" onended="videoEnded()">
+</video>');
+
+ console.log(push);
+};
+
+});
+*/
+</script>
+
+
+
+</head>
+<body>
+<video id="video1" src="data/1.mp4" onended="videoEnded()" controls autoplay="true" ></video>
+</body>
+</html>
