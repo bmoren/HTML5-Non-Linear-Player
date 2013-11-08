@@ -9,12 +9,12 @@
 <style>
 
 body{
-
 	margin: 0px 0px 0px 0px;
 	background-color: #000;
 }
 
 #video1{
+  /* Fullscreen CSS */
   position: fixed; 
   top: 0; 
   left: 0; 
@@ -35,33 +35,13 @@ function videoEnded() {
 	//push for the thumbnails
 	var push = Math.floor(Math.random() * num +1);
 
+  // send out the new attribute for the video (aka. switch it!)
 	$("#video1").attr("src", 'data/' + push + '.mp4').get(0).play();
 } ;
-
-
-/*
-$(document).ready(function(){
-
-//How many videos in your folder?
-var num = 4;
-
-//push for the thumbnails
-var push = Math.floor(Math.random() * num +1);
-
-  $('.box').text('<video id="playme" autoplay type="video/mp4" src="data/' + push + '.mp4" onended="videoEnded()">
-</video>');
-
- console.log(push);
-};
-
-});
-*/
 </script>
-
-
 
 </head>
 <body>
-<video id="video1" src="data/1.mp4" onended="videoEnded()" controls autoplay="true" ></video>
+<video id="video1" src="data/1.mp4" onended="videoEnded()" controls autoplay="true"></video>
 </body>
 </html>
