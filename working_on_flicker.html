@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<style>
+
+body{
+	margin: 0px 0px 0px 0px;
+	background-color: #000;
+  color: #fff;
+}
+
+#video1{ 
+  /* Fullscreen CSS */
+/*  position: fixed; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 100%;*/
+}
+
+#video2{ 
+  /* Fullscreen CSS */
+/*  position: fixed; 
+  top: 0; 
+  left: 0; 
+  min-width: 100%;
+  min-height: 100%;*/
+}
+
+</style>
+</head>
+<body>
+<script>
+  window.fileExtension = '.mov' ;
+  //How many videos in your folder?
+  window.num = 4;
+
+  setInterval(function(){
+
+
+    //THESE ARE ALL BACKWARDS!!!!! WHOOPS!
+    var totalTime1 = $('#video_container_1').find('video').get(0).currentTime ;
+    var currentTime1 = $('#video_container_1').find('video').get(0).duration ;
+    var totalTime2 = $('#video_container_2').find('video').get(0).currentTime ;
+    var currentTime2 = $('#video_container_2').find('video').get(0).duration ;
+
+    // console.log( "current time: " + currentTime); 
+    // console.log( "total time: " + totalTime); 
+
+    if (currentTime1 >= totalTime1 - 1) {
+     nextVid1(); 
+    } else if(currentTime2 >= totalTime2 - 1 ){
+      nextVid2(); 
+
+    }
+
+  },100)
+
+  function nextVid1() {
+
+    //push a numberd video to each for the vid slot
+    var push = Math.floor(Math.random() * window.num +1);
+
+        // send out the new attribute for the video (aka. switch it!)
+        $("#video1").attr("src", 'data/' + push + window.fileExtension ).get(0).play();
+        // bring video 1 to the front
+        $("#video_container_2").css("z-index", "0")
+        $("#video_container_1").css("z-index", "9999")
+  };
+
+
+  function nextVid2() {
+
+  //push a numberd video to each for the vid slot
+    var push2 = Math.floor(Math.random() * window.num +1);
+
+  // send out the new attribute for the video (aka. switch it!)
+        $("#video2").attr("src", 'data/' + push2 + fileExtension ).get(0).play();
+        // set the trigger so video1 plays next
+        trigger = 0;
+        // bring video 2 to the front
+        $("#video_container_1").css("z-index", "0")
+        $("#video_container_2").css("z-index", "9999")
+
+  };
+
+</script>
+
+
+<div id="video_container_1">
+<video id="video1" src="data/1.mov" type="video/mp4" controls> </video>
+</div>
+
+<div id="video_container_2">
+<video id="video2" src="data/2.mov" type="video/mp4" controls> </video>
+</div>
+
+
+<!-- <div>Current Time : <span  id="currentTime">0</span></div>
+<div>Total time : <span id="totalTime">0</span></div>
+<div>indicator : <span id="indicator">0</span></div> -->
+
+
+</body>
+</html>
