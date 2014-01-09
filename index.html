@@ -1,140 +1,54 @@
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>title</title>
+<html>
+
+<head>
+<title>This is my title of my non-loinear player</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <style>
-
-body{
-	margin: 0px 0px 0px 0px;
-	background-color: #000;
-}
+body{ background-color: #000;}
 
 #video1{
-  /* Fullscreen CSS */
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-	
-  /* Preserve aspet ratio */
-  min-width: 100%;
-  min-height: 100%;
+position: fixed;
+top:0;
+left:0;
+
+/* preserve aspect ratio*/
+min-width: 100%;
+min-height: 100%;
 }
-
-#hud{
-
-  height:200px;
-  width:200px;
-  background-color: #000;
-  color: #fff;
-  padding: 10px 10px 10px 10px;
-}
-
-.centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px;
-}
-
-
 </style>
-<script>
-//RESOURCHES///
-// http://www.html5rocks.com/en/tutorials/video/basics/
-// http://api.jquery.com/
-// http://www.w3.org/2010/05/video/mediaevents.html
 
-
-//This is always included (mostly)
-$(document).ready(function() {
-  //Difine any things that need to happen before anything loads
-  $("#hud").hide();
-//this is the closure of the $(document).ready
-});
-
-/////////////////basic biz ///////////////////
-
-// create a function to switch out the clips.
-function videoEnded(totalClips, fileExtension) {
-
-	//push for the thumbnails
-	var push = Math.floor(Math.random() * totalClips +1);
-
-  // send out the new attribute for the video (aka. switch it!)
-	$("#video1").attr("src", 'data/' + push + fileExtension ).get(0).play();
-} ;
-
-
-//Advanced Stuff ////////////////////////////
-
-  //do a thing every so often defined in milliseconds by the int below
-  setInterval(function(){
-
-    var currentTime = $('#video1').get(0).currentTime ;
-    var totalTime = $('#video1').get(0).duration ;
-
-    console.log( "current time: " + currentTime); 
-    console.log( "total time: " + totalTime); 
-
-    $('#currentTime').html("current time: " + currentTime);
-    $('#totalTime').html("total time: " + totalTime) ;
-
-   //if then statement (the .1 make sure it happens in the setInterval Loop)
-    if (currentTime >= totalTime - .1) {
-        //do something
-
-        console.log("<---------------------------------------current time is >= totaltime");
-
-        //you could also use this to call the switcher function
-        videoEnded(5, '.mp4');
-        huDisplay(1000);
-        randPlaybackRate(-5,5);
-
-
-    };
-
-//set the interval here
-  },100)
-
-// create a function to show our box
-function huDisplay(duration){
-  //show our box for a set amount of time
-  $("#hud").fadeIn('slow').delay(duration).fadeOut('slow');
-};
-
-function randPlaybackRate(min, max){
-
-//   1.0 is normal speed
-// 0.5 is half speed (slower)
-// 2.0 is double speed (faster)
-// -1.0 is backwards, normal speed
-// -0.5 is backwards, half speed
-
-  var theSpeed = Math.random() * (max - min) + min;
-  $('#video1').playbackRate=theSpeed ;
-  console.log(theSpeed);
-};
-
-
-</script>
 </head>
 
 <body>
-<!-- onended="videoEnded(5, '.mov')" -->
-<video id="video1" src="data/1.mp4" controls autoplay></video>
-<div id="hud" class="centered">
+<script>
+		//find when the video is done using the html5 video tag built in notification of the 'onEnded'
 
-This is some stuff for here!
+		// create a function to call when the video sees the 'onended' attribute
+		function videoEnded(totalClips, fileExtension){
 
-<p id="currentTime"></p>
-<p id="totalTime"></p>
+			//is this thing working?
+			//console.log("our video is done!");
+
+			//get a randm number in a range between 1 and our total number of videos
+			var getRand = Math.floor(  Math.random() * totalClips +1  );
+			//console.log("the getRand variable is now set to: " + getRand);
+
+			// set the scr attribute to a new file based on the getRand random number generator above.
+			$('#video1').attr("src", 'data/' + getRand + fileExtension).get(0).play();
+			// logs to the console the  file that will play
+			console.log('data/' + getRand + fileExtension)
+		}
 
 
-</div>
+
+
+// make it play.
+</script>
+
+<video id="video1" src="data/1.mp4" onended="videoEnded(5, '.mp4')" autoplay></video>
+
+
 </body>
 </html>

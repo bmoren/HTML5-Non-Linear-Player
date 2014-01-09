@@ -11,3 +11,8 @@ Roadmap:
   2. Add in some modes IE: full random, non-repeating random, linear
   3. Fix the full screen CSS to be more accurate
 
+
+There are 3 files in here
+	* the main basic example - index.html
+	* the more complex example showing some added functionality
+	* a version working toward removing the black flicker by switching 2 seperate 'screens' infront of eachother
