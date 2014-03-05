@@ -14,10 +14,15 @@ See comments in index.html for further explination of how things are working.
 3. Fix the full screen CSS to be more accurate
 4. fully replicate the original Max/Msp version
 
-####There are 3 files in here
+####There are a few files in here
 + the main basic example 
     + index.html
 + the more complex example showing some added functionality
     + added_complexity.html
 +  a version working toward removing the black flicker by switching 2 seperate 'screens' infront of eachother - eventually will become a replicated version of the original max build.
     + full_version_max_rep.html
++ a version showing how to altranate between playing 2 instances of the video
+    + alternating.html
++ a version of non-repeating random using arrays that are shuffled
+    + nonreprand.html
+
