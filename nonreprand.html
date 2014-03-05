@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>This is my title of my non-loinear player</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<style>
+body{ background-color: #000;}
+
+#video1{
+position: fixed;
+top:0;
+left:0;
+
+/* preserve aspect ratio*/
+min-width: 100%;
+min-height: 100%;
+}
+</style>
+
+</head>
+
+<body>
+<script>
+		//find when the video is done using the html5 video tag built in notification of the 'onEnded'
+
+
+		//functions needed to make it happen (I didnt write these but I use them all the time)
+		function range(start, end) {
+		    var foo = [];
+		    for (var i = start; i <= end; i++) {
+		        foo.push(i);
+		    }
+		    return foo;
+		}
+
+		function shuffle(o){ //v1.0 - google labs
+		    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		    return o;
+		}
+
+		//Define how many numbered clips are in your 'data' folder
+		var totalClips = 5;
+
+		//get an array of numbers in the range of your totalClips var
+		var rangeArray = range(1, totalClips);
+		//mix up the array of numbers 
+		shuffle(rangeArray);
+		//console.log("range array: " + rangeArray);
+
+		//define the i var so that it can keep track of where were at!
+		var i = 0;
+
+		// create a function to call when the video sees the 'onended' attribute
+		function videoEnded(){
+			//console.log("our video is done!");
+
+			if (i < rangeArray.length){
+			// get a random from the array
+			var getRand = rangeArray[i];
+			//increase the count
+			i++
+			//console.log("i: " + i);
+
+			} else{
+				// re shuffle the array
+				shuffle(rangeArray);
+				//console.log("range array: " + rangeArray);
+				//reset the count
+				i=0;
+				// get a rand from the new array
+				var getRand = rangeArray[i];
+				//increase the count
+				i++
+			}
+
+			// set the scr attribute to a new file based on the getRand random number generator above.
+			$('#video1').attr("src", 'data/' + getRand + '.mp4').get(0).play();
+			// logs to the console the  file that will play
+			//console.log('data/' + getRand + '.mp4')
+		}
+
+
+
+
+// make it play.
+</script>
+
+<video id="video1" src="data/1.mp4" onended="videoEnded()" autoplay></video>
+
+
+</body>
+</html>

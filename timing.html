@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<style>
+
+body{
+	margin: 0px 0px 0px 0px;
+	background-color: #000;
+}
+
+#video1{
+  /* Fullscreen CSS */
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+	
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#hud{
+
+  height:200px;
+  width:200px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 10px 10px 10px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+
+
+</style>
+<script>
+//RESOURCHES///
+// http://www.html5rocks.com/en/tutorials/video/basics/
+// http://api.jquery.com/
+// http://www.w3.org/2010/05/video/mediaevents.html
+
+/////////////////basic biz ///////////////////
+// create a function to switch out the clips.
+function videoEnded(totalClips, fileExtension) {
+
+	//push for the thumbnails
+	var push = Math.floor(Math.random() * totalClips +1);
+
+  // send out the new attribute for the video (aka. switch it!)
+	$("#video1").attr("src", 'data/' + push + fileExtension ).get(0).play();
+} ;
+
+
+//Advanced Timing Stuff ////////////////////////////
+
+  //do a thing every so often defined in milliseconds by the int below
+  setInterval(function(){
+
+    //get the current time and total durations for th current clip
+    var currentTime = $('#video1').get(0).currentTime ;
+    var totalTime = $('#video1').get(0).duration ;
+
+    //log these puppies to the console (command+option+J in browser)
+    console.log( "current time: " + currentTime); 
+    console.log( "total time: " + totalTime); 
+
+    //use jquery to push them to id's in the html
+    $('#currentTime').html("current time: " + currentTime);
+    $('#totalTime').html("total time: " + totalTime) ;
+
+   //if then statement (the .1 make sure it happens in the setInterval Loop)
+    if (currentTime >= totalTime - .1) {
+        //do something
+
+        console.log("<-----------------------------------------------current time is >= totaltime");
+
+        //call the videoEnded function here, thus using timing and a crosscheck instead of the builtin 'onended' attribute from the video tag, this just gives more control and flexibility over timing. 
+        videoEnded(5, '.mp4');
+
+
+    };
+
+//set the interval here
+  },100)
+
+
+</script>
+</head>
+
+<body>
+<!-- onended="videoEnded(5, '.mov')" -->
+<video id="video1" src="data/1.mp4" controls autoplay></video>
+
+<div id="hud">
+<p id="currentTime"></p>
+<p id="totalTime"></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>This is my title of my non-loinear player</title>
+
+<link href="styles.css" rel="stylesheet" type="text/css" />
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+</head>
+
+
+<script>
+//find when the video is done using the html5 video tag built in notification of the 'onEnded'
+
+		// create a function to call when the video sees the 'onended' attribute
+		function videoEnded(id, totalClips, fileExtension){
+
+			//is this thing working?
+			//console.log("our video is done!");
+
+			//get a randm number in a range between 1 and our total number of videos
+			var getRand = Math.floor(  Math.random() * totalClips +1  );
+			//console.log("the getRand variable is now set to: " + getRand);
+
+			// check to see if the id is absolutely equal to 1
+			if (id == 1) {
+				//if it is equal to one then play video 2
+				$('#video2').attr("src", 'data/' + getRand + fileExtension).get(0).play();
+			} else{
+
+				//otherwise play video 1 (we know that this is ok because it is a binary relationship aka. if its not 1 then do 2)
+			$('#video1').attr("src", 'data/' + getRand + fileExtension).get(0).play();
+
+			};
+
+			// so it works like this, start video 1 first, check to see if the video that ended was ID#1, if it was play video 2 else play video 1 (we know if its not 1 its 2!)
+
+		}
+</script>
+
+<body>
+	<!-- first make it only start with one video because we dont need them both playing, this will create the offest that we need -->
+	<video id="video1" src="data/1.mp4" onended="videoEnded(1, 5, '.mp4')" autoplay="false"></video>
+
+	<video id="video2" src="data/1.mp4" onended="videoEnded(2, 5, '.mp4')" autoplay></video>
+
+</body>
+</html>
