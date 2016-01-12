@@ -1,0 +1,22 @@
+
+body, html{ background-color: #000; height:100%; width:100%; margin: 0;}
+
+video{
+position: fixed;
+top:0;
+left:0;
+
+min-width: 100%;
+min-height: 100%;
+/*display:none;*/
+}
+
+#drop{
+	position: fixed;
+	top:0;
+	left:0;
+	height:100%; 
+	width:100%;
+	z-index:9999;
+	/*background-color: green;*/
+}
