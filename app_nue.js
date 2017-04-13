@@ -1,20 +1,23 @@
+var pGetRand;
+var getRand;
+
 //Settings
 var settings = {
 	changeThresh : 0.1,
 	totalClips  : 5,
 	pathToClips : "data/",
 	pbRate : 1,
-	mode : 'random'
+	mode : 'non-repeating-rand',
 
 }
 
 //init //press 'h' to hide the gui
 var gui = new dat.GUI();
-gui.add(settings, 'changeThresh').name("Cut Thresh (sec)");
+// gui.add(settings, 'changeThresh').name("Cut Thresh (sec)");
 gui.add(settings, 'totalClips').name("Total # of clips");
-gui.add(settings, 'mode', [ 'random', 'non-repeating-random', 'linear' ] ).name("Playback Mode");
-gui.add(settings, 'pathToClips').name("Path to clips");
-gui.add(settings, 'pbRate', -2,2).name("Playback Speed").step(0.25);
+gui.add(settings, 'mode', [ 'random', 'non-repeating-rand', 'linear' ] ).name("Playback Mode");
+gui.add(settings, 'pathToClips').name("Clips Folder");
+// gui.add(settings, 'pbRate', 0,3).name("Playback Speed").step(0.25);
 
 //Storage
 var video1 = $('#video1');
@@ -53,21 +56,6 @@ setInterval(function(){ //Check to see if its time to switch to the next video
 }, 100); //keep this a bit slower so it dosent trigger multiple times
 
 
-function range(start, end) {
-			var foo = [];
-			for (var i = start; i <= end; i++) {
-					foo.push(i);
-			}
-			return foo;
-	}
-
-	function shuffle(o){ //v1.0 - google labs
-			for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-			return o;
-	}
-
-
-
 function toggle(element, pElement){
 	//start playing before the clip comes to the front.
 	element.get(0).play();
@@ -76,7 +64,6 @@ function toggle(element, pElement){
 	setTimeout(function(){
 		element.css('z-index', '500');
 		pElement.css('z-index', '0');
-		var getRand;
 		if(settings.mode == 'random'){
 			getRand = Math.floor(  Math.random() * settings.totalClips +1  )
 		}
@@ -92,8 +79,13 @@ function toggle(element, pElement){
 			console.log(linearTracker);
 		}
 
-		if(settings.mode == 'non-repeating-random'){
+		if(settings.mode == 'non-repeating-rand'){
 			getRand = Math.floor(  Math.random() * settings.totalClips +1  )
+			while(getRand == pGetRand){ //are we the same, if so try again until we are not.
+				console.log("try again",getRand,pGetRand);
+				getRand = Math.floor(  Math.random() * settings.totalClips +1  )
+			}
+			pGetRand = getRand
 		}
 
 		pElement.attr({ 'src': settings.pathToClips + getRand + '.mp4' });
