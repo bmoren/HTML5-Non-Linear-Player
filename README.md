@@ -8,6 +8,8 @@ Load up as many MP4 clips into the `/data` folder as you would like and change t
 
 Files must be named with an `integer + '.mp4'` for example: `1.mp4`, `2.mp4`, `3.mp4`, etc. Files must start at `1.mp4` and can go as high as you like. For example: `9234294.mp4`
 
+Open `index.html` in chrome to get started.
+
 #### modes
 + <b>linear:</b> Plays through the clips in order
 + <b>random:</b> uses JavaScript's Math.random() function to choose a random clip
