@@ -10,7 +10,7 @@ Files must be named with an `integer + '.mp4'` for example: `1.mp4`, `2.mp4`, `3
 
 #### modes
 + <b>linear:</b> Plays through the clips in order
-+ <b>random:</b> uses Javascript's Math.Random() function to choose a random clip
++ <b>random:</b> uses JavaScript's Math.random() function to choose a random clip
 + <b>non-repeating-rand:</b> this mode will never play the same clip back to back, this eliminates visible random runs.
 
 
