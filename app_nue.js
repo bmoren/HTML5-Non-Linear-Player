@@ -101,8 +101,14 @@ function toggle(element, pElement){
 
 		//reset
 		if(rptTracker === rpt.length){
-			shuffle(rpt)
+			let lastNum = rpt[rptTracker.length-1]
+			while (rpt[0] === lastNum){
+				shuffle(rpt)
+				console.log(rpt);
+			}
 			rptTracker = 0;
+			console.log(rpt);
+
 		}
 
 		getRand = rpt[rptTracker];
